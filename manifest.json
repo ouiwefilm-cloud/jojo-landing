@@ -1,0 +1,11 @@
+{
+  "name": "jojo · 조용한 조수",
+  "short_name": "jojo",
+  "icons": [
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "theme_color": "#0C0A09",
+  "background_color": "#0C0A09",
+  "display": "standalone",
+  "start_url": "./"
+}
