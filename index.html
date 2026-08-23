@@ -39,7 +39,13 @@ a{color:inherit;text-decoration:none}
 .nav .links{margin-left:auto;display:flex;gap:22px;font-size:12.5px;color:var(--ink-2)}
 .nav .links a{transition:color .2s}
 .nav .links a:hover{color:var(--ink)}
-@media (max-width:640px){.nav .links{display:none}}
+.nav .menu-btn{display:none;margin-left:auto;background:none;border:0;color:var(--ink);font-size:20px;line-height:1;cursor:pointer;padding:6px 8px}
+@media (max-width:640px){
+  .nav .menu-btn{display:block}
+  .nav .links{margin-left:0;display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(12,10,9,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:6px 0;font-size:14.5px}
+  .nav.open .links{display:flex}
+  .nav .links a{padding:14px 24px;color:var(--ink);border-top:1px solid var(--line-soft)}
+}
 
 .wrap{max-width:1000px;margin:0 auto;padding:0 clamp(16px,4vw,24px)}
 
@@ -81,7 +87,7 @@ a{color:inherit;text-decoration:none}
 .cta-big a:hover{transform:translateY(-2px);box-shadow:0 20px 52px rgba(208,138,60,.4)}
 
 /* 섹션 */
-.sec{padding:88px 0 0}
+.sec{padding:88px 0 0;scroll-margin-top:62px}
 .eyebrow{font-size:11px;letter-spacing:.3em;color:var(--amber-dim);text-transform:uppercase;text-align:center}
 .sec h2{font-family:var(--serif);font-weight:300;font-size:clamp(21px,3.2vw,30px);letter-spacing:.06em;color:var(--ink);text-align:center;margin:12px auto 0;line-height:1.4;max-width:min(100%,30ch)}
 .sec .intro{text-align:center;color:var(--ink-2);font-size:clamp(13px,1.7vw,14px);max-width:min(100%,560px);margin:16px auto 0;line-height:1.9;padding:0 8px}
@@ -223,6 +229,7 @@ a{color:inherit;text-decoration:none}
 <!-- 내비 -->
 <nav class="nav"><div class="in">
   <div class="wm" aria-label="jojo">j<span class="no"></span>j<span class="no"></span></div><span class="sub">조용한 조수</span>
+  <button class="menu-btn" aria-label="메뉴" aria-expanded="false">☰</button>
   <div class="links"><a href="#how">작동법</a><a href="#features">여러 기능</a><a href="#why">왜 jojo</a><a href="#price">가격</a><a href="#trial">무료 체험</a></div>
 </div></nav>
 
@@ -456,6 +463,10 @@ a{color:inherit;text-decoration:none}
 
 <script>
 (function(){
+  // 모바일 메뉴 토글
+  var mb=document.querySelector('.nav .menu-btn'),nav=document.querySelector('.nav');
+  if(mb){mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);mb.textContent=o?'✕':'☰';});
+    nav.querySelectorAll('.links a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');mb.setAttribute('aria-expanded','false');mb.textContent='☰';});});}
   // 밤하늘 별
   var st=document.getElementById('app-stars');
   if(st&&!st.childElementCount){var h='';for(var i=0;i<130;i++){var x=(Math.random()*100).toFixed(2),y=(Math.random()*100).toFixed(2),sz=Math.random()<.18?2:1,tw=(3+Math.random()*5).toFixed(2),dl=(Math.random()*5).toFixed(2);h+='<span class="hstar" style="left:'+x+'%;top:'+y+'%;width:'+sz+'px;height:'+sz+'px;--tw:'+tw+'s;--dl:'+dl+'s"></span>';}st.innerHTML=h;}
